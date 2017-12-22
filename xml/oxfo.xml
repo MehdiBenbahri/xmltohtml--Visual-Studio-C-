@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjetReconG1</name>
+    </assembly>
+    <members>
+        <member name="T:ProjetOxford.PersonneDejaInscriteException">
+            <summary>
+            Classe correspondant à une exception de type "Personne déjà inscrite".
+            </summary>
+        </member>
+        <member name="M:ProjetOxford.PersonneDejaInscriteException.#ctor">
+            <summary>
+            Initialise un objet de la classe <see cref="T:ProjetOxford.PersonneDejaInscriteException"/>.
+            </summary>
+        </member>
+        <member name="M:ProjetOxford.PersonneDejaInscriteException.#ctor(System.String)">
+            <summary>
+            Initialise un objet de la classe <see cref="T:ProjetOxford.PersonneDejaInscriteException"/>.
+            </summary>
+            <param name="message">Message d'erreur à lier à l'exception levée.</param>
+        </member>
+        <member name="T:ProjetOxford.ReconnaissanceFaciale">
+            <summary>
+            Classe s'occupant de la reconnaissance faciale.
+            </summary>
+        </member>
+        <member name="M:ProjetOxford.ReconnaissanceFaciale.FaceRecFaceAddListAsync(System.String)">
+            <summary>
+             Envoie une image sur les serveurs microsoft l'ajoute dans la facelist
+             Oxford et retourne un faceId persistant
+            </summary>
+            <param name="imageFilePath">Chemin de l'image à upload</param>
+            <returns>Persistant id de l'image</returns>
+        </member>
+        <member name="M:ProjetOxford.ReconnaissanceFaciale.FaceRecCreateFaceIdTempAsync(System.String)">
+            <summary>
+            Créer un faceId temporaire avec le chemin d'une image
+            </summary>
+            <param name="imageFilePath">Chemin de l'image.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ProjetOxford.ReconnaissanceFaciale.FaceRecCompareFaceAsync(System.String)">
+            <summary>
+            Compare un visage à la liste des faceId en BDD MS.
+            </summary>
+            <param name="faceId">FaceId à comparer avec les autres.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:ProjetOxford.ReconnaissanceFaciale.GetImageAsByteArray(System.String)">
+            <summary>
+            Converti l'image en tableau binaire
+            </summary>
+            <param name="imageFilePath">Le fichier de l'image.</param>
+            <returns>Un tableau de d'octets en fonction de l'image.</returns>
+        </member>
+        <member name="M:ProjetOxford.ReconnaissanceFaciale.JsonPrettyPrint(System.String)">
+            <summary>
+            Formate le fichier JSON.
+            </summary>
+            <param name="json">Un fichier JSON en bordel.</param>
+            <returns>Un fichier JSON reformaté.</returns>
+        </member>
+        <member name="T:ProjetOxford.TraitementsBdd">
+            <summary> Classe qui va permettre la récupération des identifiants liés à la photo prise. </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+        </member>
+        <member name="F:ProjetOxford.TraitementsBdd.CNX">
+            <summary> Membre privé contenant les informations de connexion à la base de données. </summary>
+        </member>
+        <member name="F:ProjetOxford.TraitementsBdd.connexion">
+            <summary> Déclaration d'un objet de la classe MysqlConnection. Va être utilisé pour gérer la
+            connexion à la base de données MySQL. </summary>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.OuvrirConnexion">
+            <summary> Méthode de connexion à la base de données. </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            <exception cref="T:System.Exception"> Thrown when an exception error condition occurs. </exception>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.FermerConnexion">
+            <summary> Méthode publique de fermeture de la connexion à la base de données MySQL. Va
+            permettre de libérer les ressources de la base de données après une requête. </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.InsertPhoto(System.String,System.String)">
+             <summary> Enregistrement de la photo dans la BDD. </summary>
+            
+             <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            
+             <exception cref="T:System.Exception"> Thrown when an exception error condition occurs. </exception>
+            
+             <param name="adresse"> Adresse pointant sur la photo. </param>
+             <param name="faceId">  Identifier for the face. </param>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.InsertUser(ProjetOxford.User,System.Int32)">
+             <summary> Enregistrement de l'utilisateur dans la BDD. </summary>
+            
+             <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            
+             <exception cref="T:System.Exception"> Thrown when an exception error condition occurs. </exception>
+            
+             <param name="userAPersister">Utilisateur à persister.</param>
+             <param name="idPhoto">ID de la photo qui a été enregistrée.</param>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.GetMaxPhotos">
+            <summary> Méthode qui retourne le nombre d'utilisateurs dans la bdd. </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            <exception cref="T:System.Exception"> Thrown when an exception error condition occurs. </exception>
+            <returns> The maximum photos. </returns>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.GetTypesUsers">
+            <summary> Gets types users. </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            <exception cref="T:System.Exception"> Thrown when an exception error condition occurs. </exception>
+            <returns> Les types d'utilisateurs. </returns>
+        </member>
+        <member name="M:ProjetOxford.TraitementsBdd.DateTimeToUnixTimestamp(System.DateTime)">
+            <summary> Méthode qui permet de convertir un DateTime en unix timestamp (format de dates dans
+            la BDD) </summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            <param name="dateTime">Date à convertir en UnixTimestamp </param>
+            <returns> La date convertie en UnixTimestamp. </returns>
+        </member>
+        <member name="T:ProjetOxford.User">
+            <summary>
+            Classe Utilisateur qui sera liée en partie à la table Users de la BDD.
+            </summary>
+        </member>
+        <member name="M:ProjetOxford.User.#ctor(System.String,System.String,System.DateTime,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Initialise une instance de la classe User.
+            </summary>
+            <param name="prenom">Prénom de l'utilisateur.</param>
+            <param name="nom">Nom de l'utilisateur</param>
+            <param name="dateDeNaissance">Date de naissance de l'utilisateur.</param>
+            <param name="email">Email de l'utilisateur.</param>
+            <param name="sexe">Sexe de l'utilisateur ('H'/'F').</param>
+            <param name="type">Type de l'utilisateur.</param>
+            <param name="code">Code d'authentifaction lié à l'utilisateur.</param>
+        </member>
+        <member name="P:ProjetOxford.User.Prenom">
+            <summary>
+            Obtient le prénom de l'utilisateur.
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.Nom">
+            <summary>
+            Obtient le nom de l'utilisateur.
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.DateDeNaissance">
+            <summary>
+            Obtient la date de naissance de l'utilisateur.
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.Email">
+            <summary>
+            Obtient l'email de l'utilisateur.
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.Sexe">
+            <summary>
+            Obtient le sexe de l'utilisateur ('H'/'F')
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.Type">
+            <summary>
+            Obtient le type de l'utilisateur.
+            </summary>
+        </member>
+        <member name="P:ProjetOxford.User.Code">
+            <summary>
+            Obtient le code d'authentification de l'utilisateur.
+            </summary>
+        </member>
+        <member name="T:ProjetOxf.PrisePhoto">
+            <summary>Formulaire de test. Le vrai formulaire permettra de prendre une photo à partir d'une
+            caméra connectée à l'ordinateur.</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+            <content> Formulaire de prise de photo. </content>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.listCams">
+            <summary>Liste des caméras liées à l'ordinateur.</summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.savePath">
+            <summary>Lieu où sera sauvegardée la photo.</summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.photo">
+            <summary>Chemin pointant sur la photo prise.</summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.traitementTermine">
+            <summary>Booléen définissant si le traitement Oxford est terminé.</summary>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.#ctor">
+            <summary>Initialise une nouvelle instance de la classe <see cref="T:ProjetOxf.PrisePhoto"/>.</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.DateTimeToUnixTimestamp(System.DateTime)">
+            <summary>Méthode qui permet de convertir un DateTime en unix timestamp.</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+            <param name="dateTime"> Date à convertir. </param>
+            <returns> La date au format Unix Timestamp. </returns>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.TraiterImage(System.String)">
+            <summary>Fonction principale permettant d'inscrire un visage dans la BDD de microsoft après
+            avoir vérifié qu'il n'était pas déjà inscrit.</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+            <exception cref="T:ProjetOxford.PersonneDejaInscriteException">
+                Thrown when a Personne Deja Inscrite error condition occurs.
+            </exception>
+            <param name="photo">Photo à traiter.</param>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.TimerTraitement_Tick(System.Object,System.EventArgs)">
+            <summary>Chaque 100ms et quand le timer est activé, on test si le traitement async est
+            terminé.</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+            <param name="sender">Sender. </param>
+            <param name="e">EventArgs. </param>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.BtnPhoto_onclick(System.Object,System.EventArgs)">
+            <summary>Prise de photo lors du clic sur le bouton "Prendre la photo".</summary>
+            <remarks>Thomas CIANFARANI, 04/12/2017.</remarks>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.PrisePhoto_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>Méthode se déclanchant à la fermeture du formulaire. Stop la capture vidéo (affichage
+            en live à l'écran).</summary>
+            <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.components">
+            <summary> Required designer variable. </summary>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.Dispose(System.Boolean)">
+             <summary> Clean up any resources being used. </summary>
+            
+             <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+            
+             <param name="disposing">
+                 true if managed resources should be disposed; otherwise, false.
+             </param>
+        </member>
+        <member name="M:ProjetOxf.PrisePhoto.InitializeComponent">
+             <summary> Required method for Designer support - do not modify the contents of this method with
+             the code editor. </summary>
+            
+             <remarks> Thomas CIANFARANI, 04/12/2017. </remarks>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.webcam">
+            <summary> The webcam. </summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.btnPrendrePhoto">
+            <summary> The button prendre photo. </summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.timerTraitement">
+            <summary> The timer traitement. </summary>
+        </member>
+        <member name="F:ProjetOxf.PrisePhoto.metroProgressSpinner1">
+            <summary> The first metro progress spinner. </summary>
+        </member>
+        <member name="T:ProjetOxf.Program">
+            <summary>
+            Point d'entrée de l'application.
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Program.Main">
+            <summary>
+            Point d'entrée principal de l'application.
+            </summary>
+        </member>
+        <member name="T:ProjetOxf.Saisie">
+            <summary>
+            Formulaire permettant l'inscription basique d'un nouvel utilisateur dans la base.
+            Ce formulaire ne s'occupe pas de la prise de photo.
+            </summary>
+        </member>
+        <member name="F:ProjetOxf.Saisie.monUser">
+            <summary>
+            Utilisateur qui sera créé à partir des champs remplis du formulaire.
+            </summary>
+        </member>
+        <member name="F:ProjetOxf.Saisie.traitementTermine">
+            <summary>
+            Booléen indiquant si le traitement oxford est terminé ou non.
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Saisie.#ctor">
+            <summary>
+            Initialise une nouvelle instande de la classe <see cref="T:ProjetOxf.Saisie"/>.
+            </summary>
+        </member>
+        <member name="P:ProjetOxf.Saisie.Photo">
+            <summary>
+            Obtient ou modifie l'attribut photo.
+            </summary>
+        </member>
+        <member name="P:ProjetOxf.Saisie.PrisEnPhoto">
+            <summary>
+            Obtient ou modifie l'attribut prisEnPhoto.
+            </summary>
+        </member>
+        <member name="P:ProjetOxf.Saisie.FaceIdPersistent">
+            <summary>
+            Obtient ou modifie l'attribut faceIdPersistent.
+            </summary>
+        </member>
+        <member name="P:ProjetOxf.Saisie.FaceIdTemp">
+            <summary>
+            Obtient ou modifie l'attribut faceIdTemp.
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Saisie.Valide_Click(System.Object,System.EventArgs)">
+            <summary>
+            Correspond au clic sur le bouton "Valider".
+            Procède à l'inscription d'un utilisateur en créant un enregistrement dans
+            la base de données à partir des valeurs saisies dans le formulaire.
+            </summary>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.GetSexe">
+            <summary>
+            Fonction déterminant le sexe choisi par l'utilisateur.
+            </summary>
+            <returns>Retourne 'H' si c'est un homme, 'F' si c'est une femme.</returns>
+        </member>
+        <member name="M:ProjetOxf.Saisie.FormulaireEstBienRempli">
+            <summary>
+            Fonction permettant de tester si le formulaire a été rempli correctement.
+            </summary>
+            <returns>Retourne True si le formulaire a été bien rempli, et false si ce n'est pas le cas.</returns>
+        </member>
+        <member name="M:ProjetOxf.Saisie.PrisePhoto_Click(System.Object,System.EventArgs)">
+            <summary>
+            Correspond au clic sur le bouton "Prendre une photo".
+            Ouvre le formulaire de prise de photo.
+            </summary>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.PersistUser(ProjetOxford.User)">
+            <summary>
+            Fonction permettant de persister un utilisateur passé en paramètres dans les bases de données.
+            </summary>
+            <param name="user">Utilisateur à persister dans la BDD MS.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.InscrireDansBddMS">
+            <summary>
+            Méthode permettant d'inscrire un utilisateur dans la BDD de Microsoft à partir d'un faceId temporaire
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Saisie.GenCode">
+            <summary>
+            Méthode générant un code à 4 chiffres.
+            </summary>
+            <returns>Le code généré.</returns>
+        </member>
+        <member name="M:ProjetOxf.Saisie.ResetForm">
+            <summary>
+            Méthode permettant de remettre à 0 le formulaire.
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Saisie.Saisie_Activated(System.Object,System.EventArgs)">
+            <summary>
+            Evenement qui se déclenche lorsque le formulaire prend le focus.
+            Servira à afficher la validation de la prise de photo.
+            </summary>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.Timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Chaque 100ms et quand le timer est activé, on test si le traitement async est terminé.
+            </summary>
+            <param name="sender">Sender.</param>
+            <param name="e">EventArgs.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.SendMail(System.String,System.String,System.String,System.String)">
+            <summary>
+            Envoi du mail.
+            </summary>
+            <param name="mail">Mail destinataire</param>
+            <param name="prenom">Prénom du destinataire</param>
+            <param name="nom">Nom du destinataire</param>
+            <param name="photopath">Chemin de la photo</param>
+        </member>
+        <member name="F:ProjetOxf.Saisie.components">
+            <summary>
+            Variable nécessaire au concepteur.
+            </summary>
+        </member>
+        <member name="M:ProjetOxf.Saisie.Dispose(System.Boolean)">
+            <summary>
+            Nettoyage des ressources utilisées.
+            </summary>
+            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
+        </member>
+        <member name="M:ProjetOxf.Saisie.InitializeComponent">
+            <summary>
+            Méthode requise pour la prise en charge du concepteur - ne modifiez pas
+            le contenu de cette méthode avec l'éditeur de code.
+            </summary>
+        </member>
+        <member name="T:ProjetReconG1.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:ProjetReconG1.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:ProjetReconG1.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+        <member name="P:ProjetReconG1.Properties.Resources.check_oui">
+            <summary>
+              Recherche une ressource localisée de type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>
