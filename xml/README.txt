@@ -18,7 +18,6 @@ Le fichier 'oxfo.xml' est un example
 ---Mise à jour à suivre ---
 
 -Nettoyage & optimisation du code (parce que là c'est vraiment fait à l'arrache) avec une architecture MVC
--Ajout d'un formulaire pour saisir directement le chemin d'accès
 -Bientôt peut être une version en ligne directement
 -Ajout d'un bouton pour directement DL le code
 
