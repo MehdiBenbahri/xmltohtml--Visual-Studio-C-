@@ -1,7 +1,7 @@
 ---XML TO HTML ---
 
 Ce Script fonctionne seulement pour la documentation généré par Visual Studio 
-en C# je ne sais pas si il génére le même type de doc xml pour chaque projet
+en C# je ne sais pas si il génére le même type de doc xml pour chaque type de projet (C#,C++,Winform ect..)
 (normalement non)
 
 C'est simple:
